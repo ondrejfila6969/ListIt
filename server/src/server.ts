@@ -28,7 +28,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/tasks", taskRouter);
+app.use("/api/task", taskRouter);
 app.use("/api/user", userRouter);
 
 
