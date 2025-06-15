@@ -31,7 +31,6 @@ app.use(express.json());
 app.use("/api/task", taskRouter);
 app.use("/api/user", userRouter);
 
-
 app.use(express.urlencoded({extended: true}));
 if (ENV.NodeEnv === NodeEnvs.Dev) {
   app.use(morgan('dev'));
@@ -52,11 +51,5 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
   }
   return next(err);
 });
-
-const viewsDir = path.join(__dirname, 'views');
-app.set('views', viewsDir);
-
-const staticDir = path.join(__dirname, 'public');
-app.use(express.static(staticDir));
 
 export default app;
