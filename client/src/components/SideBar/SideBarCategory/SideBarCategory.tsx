@@ -1,13 +1,19 @@
+import "../../../scss/SideBar/SideBarCategory/SideBarCategory.scss";
 import type React from "react";
 import type { SideBarCategoryProps } from "./SideBarCategoryProps";
 
 export const SideBarCategory: React.FC<SideBarCategoryProps> = (props) => {
-    return(
-        <>
-            <div>
-                
-                <h1>{props.name}</h1>
-            </div>
-        </>
-    )
-}
+  const Icon = props.icon;
+  return (
+    <>
+      <div className="sidebar-wrapper">
+        <div className="sidebar-category">
+          <button className="sidebar-icon-button">
+            <Icon size={40} color={props.color} />
+          </button>
+          <p>{props.name}</p>
+        </div>
+      </div>
+    </>
+  );
+};
