@@ -1,0 +1,29 @@
+.todo-wrapper {
+  width: 500px;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  border: 3px solid black;
+  box-sizing: border-box;
+  
+  .todo-title {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    h1 {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
