@@ -12,7 +12,7 @@ export const AppRoutes: FC = () => {
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/login" element={<Login/>}/>
-                <Route path="/registration" element={<Registration/>}/>
+                <Route path="/register" element={<Registration/>}/>
             </Routes>
         </BrowserRouter>
     )
