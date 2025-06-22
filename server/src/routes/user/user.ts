@@ -12,8 +12,6 @@ userRouter.post("/login", userController.login);
 
 userRouter.post("/register", userController.register);
 
-userRouter.post("/", userController.createUser);
-
 userRouter.put("/:id", userController.updateUser);
 
 userRouter.delete("/:id", userController.deleteUser);
