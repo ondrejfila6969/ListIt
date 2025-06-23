@@ -4,8 +4,11 @@ import "../../scss/SideBar/SideBar.scss";
 /* COMPONENTS*/
 import { SideBarCategory } from "./SideBarCategory/SideBarCategory";
 import { UserCircle, LogOut, Settings, Info, LayoutDashboard, ClipboardCheck, Logs } from "lucide-react";
+import { useAuth } from "../../context/AuthProvider/AuthProvider";
 
 export const SideBar: React.FC = () => {
+  const {user, isLoading} = useAuth();
+
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar">
@@ -13,8 +16,19 @@ export const SideBar: React.FC = () => {
           <UserCircle size={80} color="white" />
         </div>
         <div className="sidebar-user-info">
-          <h1>Ondra</h1>
-          <h2>ondra@email.cz</h2>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : user ? (
+            <>
+              <h1>{user.first_name} {user.last_name}</h1>
+              <h2>{user.email}</h2>
+            </>
+          ) : (
+            <>
+              <h1>Guest</h1>
+              <h2>Not logged in</h2>
+            </>
+          )}
         </div>
         <div className="sidebar-categories">
           <SideBarCategory name="Dashboard" icon={LayoutDashboard} color="white" path="/"/>

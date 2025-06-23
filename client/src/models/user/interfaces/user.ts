@@ -12,7 +12,7 @@ export interface ResponseData<T = any> {
     token: string;
 }
 
-export interface ResponseGetData<T = any> {
+export interface ResponseGetData<T = User[]> {
     status: number;
     message: string;
     payload: T;
