@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider/AuthProvider";
 import { registerUser } from "../../models/user/user";
 import type { FormData } from "../../models/user/interfaces/user";
+import Swal from "sweetalert2";
 
 export const Registration: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({} as FormData);
@@ -20,7 +21,11 @@ export const Registration: React.FC = () => {
     const res = await registerUser(formData);
     if (res.status === 201) {
       login(res.token);
-      alert("success");
+      await Swal.fire({
+        title: "Registration was succesful",
+        icon: "success",
+        confirmButtonText: "Continue"
+      })
       return navigate("/");
     }
     setInfo(res.message);
