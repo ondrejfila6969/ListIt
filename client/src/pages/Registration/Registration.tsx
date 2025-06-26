@@ -22,10 +22,22 @@ export const Registration: React.FC = () => {
     if (res.status === 201) {
       login(res.token);
       await Swal.fire({
-        title: "Registration was succesful",
+        title: "Registration was successful",
+        text: "Welcome 😊",
         icon: "success",
-        confirmButtonText: "Continue"
-      })
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        position: "top-end",
+        background: "#ffffff",
+        color: "#1f1f1f",
+        iconColor: "#00b894",
+        customClass: {
+          popup: "custom-swal-popup animate-swal-slide",
+          title: "custom-swal-title",
+        },
+        toast: true
+      });
       return navigate("/");
     }
     setInfo(res.message);

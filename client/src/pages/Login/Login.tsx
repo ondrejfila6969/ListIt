@@ -21,16 +21,18 @@ export const Login: React.FC = () => {
         title: "Login was successful",
         text: "Welcome back 😊",
         icon: "success",
-        confirmButtonText: "Continue",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        position: "top-end",
         background: "#ffffff",
         color: "#1f1f1f",
-        iconColor: "#00b894", 
-        confirmButtonColor: "#0984e3",
+        iconColor: "#00b894",
         customClass: {
-          popup: "custom-swal-popup",
+          popup: "custom-swal-popup animate-swal-slide",
           title: "custom-swal-title",
-          confirmButton: "custom-swal-button",
         },
+        toast: true
       });
       navigate("/");
     }

@@ -8,13 +8,16 @@ import { Registration } from "./Registration/Registration";
 
 /* COMPONENTS */
 import { PrivateRoute } from "../components/PrivateRoute/PrivateRoute";
+import { HomePageContent } from "./Home/HomePageContent/HomePageContent";
 
 export const AppRoutes: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />}>
+            <Route index element={<HomePageContent/>}/>
+          </Route>
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />

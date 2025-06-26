@@ -3,43 +3,80 @@ import "../../scss/SideBar/SideBar.scss";
 
 /* COMPONENTS*/
 import { SideBarCategory } from "./SideBarCategory/SideBarCategory";
-import { UserCircle, LogOut, Settings, Info, LayoutDashboard, ClipboardCheck, Logs } from "lucide-react";
+import {
+  UserCircle,
+  LogOut,
+  Settings,
+  Info,
+  LayoutDashboard,
+  ClipboardCheck,
+  Logs,
+} from "lucide-react";
 import { useAuth } from "../../context/AuthProvider/AuthProvider";
 
 export const SideBar: React.FC = () => {
-  const {user, isLoading} = useAuth();
+  const { user, isLoading } = useAuth();
 
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar">
-        <div className="sidebar-user-icon">
-          <UserCircle size={80} color="white" />
-        </div>
-        <div className="sidebar-user-info">
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : user ? (
-            <>
-              <h1>{user.first_name} {user.last_name}</h1>
-              <h2>{user.email}</h2>
-            </>
-          ) : (
-            <>
-              <h1>Guest</h1>
-              <h2>Not logged in</h2>
-            </>
-          )}
+        <div className="sidebar-user">
+          <div className="sidebar-user-icon">
+            <UserCircle size={80} color="white" />
+          </div>
+          <div>
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : user ? (
+              <>
+                <h1 className="sidebar-user-info">
+                  {user.first_name} {user.last_name}
+                </h1>
+                <h3>{user.email}</h3>
+              </>
+            ) : (
+              <>
+                <h1>Guest</h1>
+                <h2>Not logged in</h2>
+              </>
+            )}
+          </div>
         </div>
         <div className="sidebar-categories">
-          <SideBarCategory name="Dashboard" icon={LayoutDashboard} color="white" path="/"/>
-          <SideBarCategory name="My Task" icon={ClipboardCheck} color="white" path="/tasks"/>
-          <SideBarCategory name="Task Categories" icon={Logs} color="white" path="/task-categories"/>
-          <SideBarCategory name="Settings" icon={Settings} color="white" path="/settings"/>
-          <SideBarCategory name="Help" icon={Info} color="white" path="/help"/>
+          <SideBarCategory
+            name="Dashboard"
+            icon={LayoutDashboard}
+            color="white"
+            path="/"
+          />
+          <SideBarCategory
+            name="My Task"
+            icon={ClipboardCheck}
+            color="white"
+            path="/tasks"
+          />
+          <SideBarCategory
+            name="Task Categories"
+            icon={Logs}
+            color="white"
+            path="/task-categories"
+          />
+          <SideBarCategory
+            name="Settings"
+            icon={Settings}
+            color="white"
+            path="/settings"
+          />
+          <SideBarCategory name="Help" icon={Info} color="white" path="/help" />
         </div>
 
         <div className="sidebar-logout">
-          <SideBarCategory name="Logout" icon={LogOut} color="white" path="/login"/>
+          <SideBarCategory
+            name="Logout"
+            icon={LogOut}
+            color="white"
+            path="/login"
+          />
         </div>
       </div>
     </div>
