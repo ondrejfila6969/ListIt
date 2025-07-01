@@ -3,6 +3,7 @@ import "../../scss/ToDo/ToDo.scss";
 import { NotebookPen} from "lucide-react";
 import type { ToDoProps } from "./ToDoProps/ToDoProps";
 import { AddTaskButton } from "../AddTaskButton/AddTaskButton";
+import { ViewAll } from "../CRUD/ViewAll/ViewAll";
 
 export const ToDo: React.FC<ToDoProps & {showAddButton ?: boolean}> = (props) => {
   return (
@@ -16,24 +17,7 @@ export const ToDo: React.FC<ToDoProps & {showAddButton ?: boolean}> = (props) =>
           </div>
         </div>
         <div className="todo-container">
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae
-            voluptate debitis nam necessitatibus quae aliquid a autem
-            consectetur? Natus illum modi et sed. Laborum vero totam at atque
-            eius nemo.
-          </p>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae
-            voluptate debitis nam necessitatibus quae aliquid a autem
-            consectetur? Natus illum modi et sed. Laborum vero totam at atque
-            eius nemo.
-          </p>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae
-            voluptate debitis nam necessitatibus quae aliquid a autem
-            consectetur? Natus illum modi et sed. Laborum vero totam at atque
-            eius nemo.
-          </p>
+          <ViewAll/>
         </div>
       </div>
     </>

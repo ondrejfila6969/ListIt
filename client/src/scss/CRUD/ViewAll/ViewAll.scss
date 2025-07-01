@@ -1,0 +1,80 @@
+.viewall-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.viewall-task-card {
+  position: relative;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.viewall-task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .viewall-priority {
+    font-size: 14px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    background-color: #eee;
+    text-transform: capitalize;
+  }
+
+  .viewall-priority.high {
+    background-color: #f44336;
+    color: #fff;
+  }
+
+  .viewall-priority.medium {
+    background-color: #ff9800;
+    color: #fff;
+  }
+
+  .viewall-priority.low {
+    background-color: #4caf50;
+    color: #fff;
+  }
+}
+
+.viewall-task-desc {
+  margin: 0.5rem 0;
+  font-size: 15px;
+  color: #444;
+}
+
+.viewall-task-date {
+  font-size: 14px;
+  color: #666;
+}
+
+.viewall-delete-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+
+  svg {
+    width: 22px;
+    height: 22px;
+    color: #cc0000;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+    color: #e60000;
+  }
+}
