@@ -4,8 +4,8 @@ const taskSchema = new mongoose.Schema({
     name: { type: String, required: true, maxlength: 30 },
     description: { type: String, required: false },
     completed: { type: Boolean, default: false },
-    deadlineDate: { type: Date },
-    priority: { type: String, enum: ["low", "medium", "high"], default: "medium" },
+    deadlineDate: { type: Date},
+    priority: { type: String, enum: ["low", "medium", "high"], default: "medium"},
     createdAt: { type: Date, default: Date.now },
     modifiedAt: { type: Date, default: Date.now },
 })

@@ -1,7 +1,7 @@
-import type { FormData, ResponseData, ResponseGetData, User } from "./interfaces/user";
+import type { ResponseData, ResponseGetData, User, UserFormData } from "./interfaces/user";
 
-export const registerUser = async (formData: FormData): Promise<ResponseData> => {
-    const req = await fetch("http://localhost:3000/api/user/register", {
+export const registerUser = async (formData: UserFormData): Promise<ResponseData<User>> => {
+    const req: Response = await fetch("http://localhost:3000/api/user/register", {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export const registerUser = async (formData: FormData): Promise<ResponseData> =>
     };
 };
 
-export const loginUser = async (formData: FormData): Promise<ResponseData> => {
+export const loginUser = async (formData: UserFormData): Promise<ResponseData<User>> => {
     const req: Response = await fetch("http://localhost:3000/api/user/login", {
         headers: {
             Accept: "application/json",
@@ -47,7 +47,7 @@ export const loginUser = async (formData: FormData): Promise<ResponseData> => {
     };
 };
 
-export const getUser = async (): Promise<ResponseGetData<User> | null> => {
+export const getUser = async (): Promise<ResponseGetData<User[]> | null> => {
     const token: string | null = localStorage.getItem("token");
     if(!token) return null;
 
@@ -68,7 +68,7 @@ export const getUser = async (): Promise<ResponseGetData<User> | null> => {
     };
 };
 
-export const getUserById = async (id: string): Promise<ResponseGetData> => {
+export const getUserById = async (id: string): Promise<ResponseGetData<User>> => {
     const req: Response = await fetch(`http://localhost:3000/api/user/${id}`, {
         headers: {
             Accept: "application/json",

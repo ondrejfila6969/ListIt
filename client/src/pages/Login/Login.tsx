@@ -4,11 +4,11 @@ import "../../scss/SweetAlert/SweetAlert.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider/AuthProvider";
 import { loginUser } from "../../models/user/user";
-import type { FormData } from "../../models/user/interfaces/user";
+import type { UserFormData } from "../../models/user/interfaces/user";
 import Swal from "sweetalert2";
 
 export const Login: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({} as FormData);
+  const [formData, setFormData] = useState<UserFormData>({} as UserFormData);
   const [info, setInfo] = useState<string | null>(null);
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -40,7 +40,7 @@ export const Login: React.FC = () => {
   };
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({
+    setFormData((prev: any) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));

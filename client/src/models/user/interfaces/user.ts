@@ -1,26 +1,25 @@
-export interface FormData {
+export interface BaseResponse<T> {
+    status: number;
+    message: string;
+    payload: T;
+}
+
+export interface ResponseData<T = User> extends BaseResponse<T> {
+    token?: string | undefined;
+}
+
+export interface ResponseGetData<T = User[]> extends BaseResponse<T> {}
+
+export interface UserFormData {
     first_name?: string;
     last_name?: string;
     email: string;
     password: string;
 }
 
-export interface ResponseData<T = any> {
-    status: number;
-    message: string;
-    payload: T;
-    token: string;
-}
-
-export interface ResponseGetData<T = User[]> {
-    status: number;
-    message: string;
-    payload: T;
-}
-
 export type User = {
-  _id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
+    _id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
 };
