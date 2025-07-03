@@ -19,7 +19,7 @@ export const AppRoutes: FC = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />}>
             <Route index element={<HomePageContent/>}/>
-            <Route path="tasks" element={<><ToDo name="My Tasks"/><TaskDetails/></>}/>
+            <Route path="tasks" element={<><ToDo name="My Tasks" showSortButton/><TaskDetails/></>}/>
           </Route>
         </Route>
         <Route path="/login" element={<Login />} />

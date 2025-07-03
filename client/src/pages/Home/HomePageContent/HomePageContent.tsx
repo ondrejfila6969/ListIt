@@ -6,7 +6,7 @@ import { CompletedTasks } from "../../../components/CompletedTasks/CompletedTask
 export const HomePageContent: React.FC = () => {
   return (
     <>
-      <ToDo name="To-Do" showAddButton/>
+      <ToDo name="To-Do" showAddButton showSortButton={false}/>
       <div className="home-page-tasks-container">
         <TasksStatus />
         <CompletedTasks />
