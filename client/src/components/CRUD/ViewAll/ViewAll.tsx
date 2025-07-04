@@ -1,20 +1,29 @@
-import React, { type JSX } from "react";
+import React from "react";
 import { Loading } from "../../../pages/Loading/Loading";
 import { Error } from "../../../pages/Error/Error";
 import "../../../scss/CRUD/ViewAll/ViewAll.scss";
 import { Trash2 } from "lucide-react";
-import { TaskDeleteForm } from "../TaskDeleteForm/TaskDeleteForm";
 
 import type { ViewAllProps } from "./ViewAllProps/ViewAllProps";
+import { deleteTask } from "../../../models/task/task";
 
-export const ViewAll: React.FC<ViewAllProps> = ({ tasks, isLoaded}) => {
-  const showDeleteForm = (): JSX.Element => {
-    return <TaskDeleteForm />;
-  };
+export const ViewAll: React.FC<ViewAllProps> = ({ tasks, isLoaded, onTaskDeleted}) => {
 
   if (isLoaded === null) return <Error />;
   if (!isLoaded) return <Loading />;
 
+  const handleDeleteButton = async (taskId: string) => {
+    try {
+      const res = await deleteTask(taskId);
+      if (res.status === 200) {
+        onTaskDeleted();
+      } else {
+        console.log("FAILED TO DELETE TASK !");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="viewall-task-list">
@@ -34,7 +43,7 @@ export const ViewAll: React.FC<ViewAllProps> = ({ tasks, isLoaded}) => {
               <button
                 className="viewall-delete-btn"
                 aria-label={`Delete ${task.name}`}
-                onClick={showDeleteForm}
+                onClick={() => {handleDeleteButton(task._id)}}
               >
                 <Trash2 />
               </button>
