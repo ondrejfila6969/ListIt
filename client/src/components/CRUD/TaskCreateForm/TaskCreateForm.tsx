@@ -7,7 +7,7 @@ import { useAuth } from "../../../context/AuthProvider/AuthProvider";
 
 export type TaskFormDataForCreate = TaskFormData & { user: string };
 
-export const TaskCreateForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+export const TaskCreateForm: React.FC<{ onClose: () => void; onCreated: () => void; }> = ({ onClose, onCreated}) => {
   const { user } = useAuth();
   const [formData, setFormData] = useState<TaskFormData>({
     name: "",
@@ -45,6 +45,7 @@ export const TaskCreateForm: React.FC<{ onClose: () => void }> = ({ onClose }) =
     try {
       const res = await createTask(dataToSend);
       if (res.status === 201) {
+        onCreated();
         onClose();
         navigate("/");
       } else {
