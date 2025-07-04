@@ -1,9 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import Task from "@src/models/tasks/tasks";
+import { JwtPayload } from "jsonwebtoken";
 
 export const getAllTasks = async (req: Request, res: Response, next: NextFunction): Promise<Response | any> => {
     try {
-        const data = await Task.find();
+        const userId = (req.user as JwtPayload).userId;
+
+        const data = await Task.find({user: userId}).populate("user", "-password");
         if (data && data.length !== 0) {
             return res.status(200).send({
                 message: "Tasks found",
@@ -20,7 +23,8 @@ export const getAllTasks = async (req: Request, res: Response, next: NextFunctio
 
 export const getTasksById = async (req: Request, res: Response, next: NextFunction): Promise<Response | any> => {
     try {
-        const data = await Task.findById(req.params.id);
+        const userId = (req.user as JwtPayload).userId;
+        const data = await Task.findOne({_id: req.params.id, user: userId})
         if (data) {
             return res.status(200).send({
                 message: "Task found",
@@ -37,12 +41,16 @@ export const getTasksById = async (req: Request, res: Response, next: NextFuncti
 
 export const createTask = async (req: Request, res: Response, next: NextFunction): Promise<Response | any> => {
     try {
+
+        const userId = (req.user as JwtPayload).userId;
+
         const data = new Task({
             name: req.body.name,
             description: req.body.description,
             completed: req.body.completed,
             deadlineDate: req.body.deadlineDate,
             priority: req.body.priority,
+            user: userId
         })
         const result = await data.save();
         if(result) {
@@ -61,6 +69,7 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
 
 export const updateTask = async (req: Request, res: Response, next: NextFunction): Promise<Response | any> => {
     try {
+        const userId = (req.user as JwtPayload).userId;
         const data = {
             name: req.body.name,
             description: req.body.description,
@@ -68,7 +77,7 @@ export const updateTask = async (req: Request, res: Response, next: NextFunction
             deadlineDate: req.body.deadlineDate,
             priority: req.body.priority
         }
-        const result = await Task.findByIdAndUpdate(req.params.id, data, {new: true});
+        const result = await Task.findOneAndUpdate({_id: req.params.id, user: userId}, data, {new: true});
         if(result) {
             return res.status(200).send({
                 message: "Task updated",
@@ -85,7 +94,8 @@ export const updateTask = async (req: Request, res: Response, next: NextFunction
 
 export const deleteTask = async (req: Request, res: Response, next: NextFunction): Promise<Response | any> => {
     try {
-        const result = await Task.findByIdAndDelete(req.params.id);
+        const userId = (req.user as JwtPayload).userId;
+        const result = await Task.findOneAndDelete({_id: req.params.id, user: userId});
         if(result) {
             return res.status(200).send({
                 message: "Task deleted",

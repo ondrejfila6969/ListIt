@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import User from "@src/models/user/user";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import mongoose from "mongoose";
 
 /* USER AUTH */
 export const login = async (req: Request, res: Response, next: NextFunction): Promise<Response | any> => {

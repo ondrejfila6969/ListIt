@@ -1,9 +1,9 @@
-export interface TaskFormData {
+export type TaskFormData = {
   name: string;
   description?: string;
   deadlineDate: string;
   priority: "low" | "medium" | "high";
-}
+};
 
 export interface Task extends TaskFormData {
   _id: string;

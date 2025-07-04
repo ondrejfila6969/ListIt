@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "../../../scss/CRUD/TaskCreateForm/TaskCreateForm.scss";
-import type { TaskCreateFormProps } from "./TaskCreateFormProps/TaskCreateFormProps";
 import { useNavigate } from "react-router-dom";
 import { createTask } from "../../../models/task/task";
 import type { TaskFormData } from "../../../models/task/interfaces/task";
+import { useAuth } from "../../../context/AuthProvider/AuthProvider";
 
-export const TaskCreateForm: React.FC<TaskCreateFormProps> = ({ onClose }) => {
+export type TaskFormDataForCreate = TaskFormData & { user: string };
+
+export const TaskCreateForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  const { user } = useAuth();
   const [formData, setFormData] = useState<TaskFormData>({
     name: "",
     description: "",
@@ -27,13 +30,30 @@ export const TaskCreateForm: React.FC<TaskCreateFormProps> = ({ onClose }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await createTask(formData);
-    if (res.status === 201) {
-      onClose();
-      navigate("/");
-    } else {
-      setInfo(res.message);
+
+    if (!user) {
+      setInfo("User is not logged in.");
+      return;
     }
+
+    const dataToSend: TaskFormDataForCreate = {
+      ...formData,
+      user: user._id,
+      deadlineDate: formData.deadlineDate || ""
+    };
+
+    try {
+      const res = await createTask(dataToSend);
+      if (res.status === 201) {
+        onClose();
+        navigate("/");
+      } else {
+        setInfo(res.message || "Failed to create task");
+      }
+    } catch (error) {
+      setInfo("An error occurred while creating the task.");
+    }
+    console.log(dataToSend);
   };
 
   return (

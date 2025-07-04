@@ -8,7 +8,7 @@ export type AuthProviderProps = {
 export type AuthContextType = {
     user: User | null;
     isLoading: boolean;
-    login: (token: string | undefined) => Promise<void>;
+    login: (token: string) => Promise<void>;
     logout: () => void;
     fetchUser: () => Promise<void>;
 }

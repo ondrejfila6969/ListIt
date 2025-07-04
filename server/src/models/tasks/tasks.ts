@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema({
+    user: {type: String, ref: "User", required: true},
     name: { type: String, required: true, maxlength: 30 },
     description: { type: String, required: false },
     completed: { type: Boolean, default: false },

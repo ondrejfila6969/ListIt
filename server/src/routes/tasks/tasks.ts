@@ -1,13 +1,16 @@
 import express, { Router } from "express";
 import * as taskController from "@src/controllers/tasks/tasks";
+import { verifyToken } from "@src/middlewares/auth";
 
 const taskRouter: Router = express.Router();
 
+taskRouter.use(verifyToken);
+
 taskRouter.get("/", taskController.getAllTasks);
 
-taskRouter.get("/:id", taskController.getTasksById);
-
 taskRouter.post("/", taskController.createTask);
+
+taskRouter.get("/:id", taskController.getTasksById);
 
 taskRouter.put("/:id", taskController.updateTask);
 
