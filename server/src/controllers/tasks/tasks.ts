@@ -46,6 +46,7 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
 
         const data = new Task({
             name: req.body.name,
+            category: req.body.category,
             description: req.body.description,
             completed: req.body.completed,
             deadlineDate: req.body.deadlineDate,
@@ -72,6 +73,7 @@ export const updateTask = async (req: Request, res: Response, next: NextFunction
         const userId = (req.user as JwtPayload).userId;
         const data = {
             name: req.body.name,
+            category: req.body.category,
             description: req.body.description,
             completed: req.body.completed,
             deadlineDate: req.body.deadlineDate,

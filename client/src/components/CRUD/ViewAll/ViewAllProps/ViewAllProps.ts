@@ -4,4 +4,5 @@ export type ViewAllProps = {
   tasks?: Task[];
   isLoaded: boolean | null;
   onTaskDeleted: () => void;
+  onTaskCompleted: () => void;
 };

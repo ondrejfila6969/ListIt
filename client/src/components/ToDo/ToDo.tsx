@@ -58,7 +58,7 @@ export const ToDo: React.FC<ToDoProps> = ({
         </div>
       </div>
       <div className="todo-container">
-        <ViewAll tasks={tasks} isLoaded={isLoaded} onTaskDeleted={loadData}/>
+        <ViewAll tasks={tasks} isLoaded={isLoaded} onTaskDeleted={loadData} onTaskCompleted={loadData}/>
       </div>
     </div>
   );

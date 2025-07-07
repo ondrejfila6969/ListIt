@@ -16,7 +16,7 @@ export const Login: React.FC = () => {
   const sendData = async () => {
     const res = await loginUser(formData);
     if (res.status === 200) {
-      login(res.token);
+      login(String(res.token));
       await Swal.fire({
         title: "Login was successful",
         text: "Welcome back 😊",
@@ -52,8 +52,9 @@ export const Login: React.FC = () => {
   };
 
   useEffect(() => {
-    document.title = "ListIt <3";
-  }, []);
+      document.title = "ListIt!"
+    }, []);
+
   return (
     <>
       <div className="login-page">

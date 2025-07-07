@@ -3,11 +3,11 @@ import "../../scss/Registration/Registration.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider/AuthProvider";
 import { registerUser } from "../../models/user/user";
-import type { FormData } from "../../models/user/interfaces/user";
+import type { UserFormData } from "../../models/user/interfaces/user";
 import Swal from "sweetalert2";
 
 export const Registration: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({} as FormData);
+  const [formData, setFormData] = useState<UserFormData>({} as UserFormData);
   const [info, setInfo] = useState<string | null>(null);
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -20,7 +20,7 @@ export const Registration: React.FC = () => {
 
     const res = await registerUser(formData);
     if (res.status === 201) {
-      login(res.token);
+      login(String(res.token));
       await Swal.fire({
         title: "Registration was successful",
         text: "Welcome 😊",
@@ -56,7 +56,7 @@ export const Registration: React.FC = () => {
   }
 
   useEffect(() => {
-    document.title = "ListIt <3"
+    document.title = "ListIt!"
   }, []);
 
   return (

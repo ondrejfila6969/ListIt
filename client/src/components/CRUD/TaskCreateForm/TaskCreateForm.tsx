@@ -7,21 +7,36 @@ import { useAuth } from "../../../context/AuthProvider/AuthProvider";
 
 export type TaskFormDataForCreate = TaskFormData & { user: string };
 
-export const TaskCreateForm: React.FC<{ onClose: () => void; onCreated: () => void; }> = ({ onClose, onCreated}) => {
+export const TaskCreateForm: React.FC<{
+  onClose: () => void;
+  onCreated: () => void;
+}> = ({ onClose, onCreated }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<TaskFormData>({
     name: "",
+    category: "work", // výchozí správná hodnota
     description: "",
     deadlineDate: "",
     priority: "medium",
   });
+
   const [info, setInfo] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   const handleInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleCategoryChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      category: e.target.value as TaskFormData["category"],
+    }));
   };
 
   const handlePriorityChange = (priority: "low" | "medium" | "high") => {
@@ -36,10 +51,9 @@ export const TaskCreateForm: React.FC<{ onClose: () => void; onCreated: () => vo
       return;
     }
 
-    const dataToSend: TaskFormDataForCreate = {
+    const dataToSend = {
       ...formData,
       user: user._id,
-      deadlineDate: formData.deadlineDate || ""
     };
 
     try {
@@ -54,8 +68,17 @@ export const TaskCreateForm: React.FC<{ onClose: () => void; onCreated: () => vo
     } catch (error) {
       setInfo("An error occurred while creating the task.");
     }
-    console.log(dataToSend);
   };
+
+  const categories = [
+    { value: "work", label: "💼 Work" },
+    { value: "personal", label: "🏠 Personal" },
+    { value: "shopping", label: "🛒 Shopping" },
+    { value: "learning", label: "📚 Learning" },
+    { value: "health", label: "💪 Health" },
+    { value: "finance", label: "💰 Finance" },
+    { value: "other", label: "📌 Other" },
+  ];
 
   return (
     <div className="modal-overlay">
@@ -86,6 +109,23 @@ export const TaskCreateForm: React.FC<{ onClose: () => void; onCreated: () => vo
               onChange={handleInput}
               required
             />
+          </div>
+
+          <div className="task-create-form-category">
+            <h1>Category</h1>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleCategoryChange}
+              required
+              className="task-create-form-category-select"
+            >
+              {categories.map((cat) => (
+                <option key={cat.value} value={cat.value}>
+                  {cat.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           <h1>Priority</h1>

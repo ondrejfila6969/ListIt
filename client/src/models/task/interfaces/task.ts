@@ -1,5 +1,6 @@
 export type TaskFormData = {
   name: string;
+  category: "work" | "personal" | "shopping" | "learning" | "health" | "finance" | "other";
   description?: string;
   deadlineDate: string;
   priority: "low" | "medium" | "high";

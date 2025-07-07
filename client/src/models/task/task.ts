@@ -91,3 +91,22 @@ export const deleteTask = async (id: string): Promise<ResponseData<null>> => {
         payload: data.payload
     }
 }
+
+export const completeTask = async (id: string, formData: TaskFormData): Promise<ResponseData<Task>> => {
+    const token: string | null = localStorage.getItem("token");
+    const req = await fetch(`http://localhost:3000/api/task/${id}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        method: "PUT",
+        body: JSON.stringify(formData)
+    });
+    const data = await req.json();
+    return {
+        status: req.status,
+        message: data.message,
+        payload: data.payload
+    }
+}
