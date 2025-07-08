@@ -13,6 +13,7 @@ export const ToDo: React.FC<ToDoProps> = ({
   name,
   showAddButton,
   showSortButton,
+  onTaskSelect
 }) => {
   const [tasks, setTasks] = useState<Task[]>();
   const [isLoaded, setLoaded] = useState<boolean | null>(false);
@@ -58,7 +59,13 @@ export const ToDo: React.FC<ToDoProps> = ({
         </div>
       </div>
       <div className="todo-container">
-        <ViewAll tasks={tasks} isLoaded={isLoaded} onTaskDeleted={loadData} onTaskCompleted={loadData}/>
+        <ViewAll
+          tasks={tasks}
+          isLoaded={isLoaded}
+          onTaskDeleted={loadData}
+          onTaskCompleted={loadData}
+          onTaskSelect={onTaskSelect}
+        />
       </div>
     </div>
   );

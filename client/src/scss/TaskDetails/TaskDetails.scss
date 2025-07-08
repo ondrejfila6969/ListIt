@@ -7,7 +7,7 @@
   padding: 1.5rem;
   border-radius: 8px;
   box-sizing: border-box;
-  
+
   .task-details-title {
     width: 100%;
     height: 30px;
@@ -17,14 +17,75 @@
     margin-bottom: 1rem;
 
     h1 {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 0;
+      font-size: 1.5rem;
+      color: #2c3e50;
     }
 
     svg {
-      width: 30px;
-      height: 30px;
+      width: 24px;
+      height: 24px;
+      color: #2c3e50;
     }
+  }
+
+  .task-details-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #2c3e50;
+
+    h2 {
+      margin-bottom: 0.8rem;
+      font-size: 1.4rem;
+    }
+
+    p {
+      margin-bottom: 0.6rem;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    .incomplete {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+  }
+
+  .viewall-task-category {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+    font-size: 0.85rem;
+    text-transform: capitalize;
+
+    &.work { background-color: #f1c40f; }
+    &.personal { background-color: #3498db; }
+    &.shopping { background-color: #9b59b6; }
+    &.health { background-color: #1abc9c; }
+    &.finance { background-color: #e67e22; }
+    &.school { background-color: #e74c3c; }
+    &.home { background-color: #95a5a6; }
+    &.travel { background-color: #34495e; }
+    &.other { background-color: #7f8c8d; }
+  }
+
+  .viewall-priority {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+    font-size: 0.85rem;
+    text-transform: capitalize;
+
+    &.low { background-color: #2ecc71; }
+    &.medium { background-color: #f39c12; }
+    &.high { background-color: #e74c3c; }
   }
 }

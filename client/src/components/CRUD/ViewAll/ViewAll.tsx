@@ -6,13 +6,14 @@ import { Trash2, Check } from "lucide-react";
 import { completeTask } from "../../../models/task/task";
 import type { ViewAllProps } from "./ViewAllProps/ViewAllProps";
 import { deleteTask } from "../../../models/task/task";
-import type { Task } from "../../../models/task/interfaces/task";
+import type { TaskStructure } from "../../../models/task/interfaces/task";
 
 export const ViewAll: React.FC<ViewAllProps> = ({
   tasks,
   isLoaded,
   onTaskDeleted,
   onTaskCompleted,
+  onTaskSelect, 
 }) => {
   if (isLoaded === null) return <Error />;
   if (!isLoaded) return <Loading />;
@@ -30,7 +31,7 @@ export const ViewAll: React.FC<ViewAllProps> = ({
     }
   };
 
-  const handleCompleteButton = async (taskId: string, task: Task) => {
+  const handleCompleteButton = async (taskId: string, task: TaskStructure) => {
     try {
       const formData = {
         name: task.name,
@@ -70,7 +71,10 @@ export const ViewAll: React.FC<ViewAllProps> = ({
         tasks.map((task) => (
           <div
             key={task._id}
-            className={`viewall-task-card ${task.completed ? "completed" : "incomplete"}`}
+            className={`viewall-task-card ${
+              task.completed ? "completed" : "incomplete"
+            }`}
+            onClick={() => onTaskSelect(task)}
           >
             <div className="viewall-task-header">
               <h2>{task.name}</h2>
@@ -90,7 +94,7 @@ export const ViewAll: React.FC<ViewAllProps> = ({
 
             <div className="viewall-footer">
               <p className="viewall-task-date">Due: {task.deadlineDate}</p>
-              <div className="viewall-task-actions">
+              <div className="viewall-task-actions" onClick={e => e.stopPropagation()}>
                 {!task.completed && (
                   <button
                     className="viewall-complete-btn"
