@@ -7,7 +7,11 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ selectedTask }) => {
   if (!selectedTask) {
     return (
       <div className="task-details-wrapper">
-        <p>No task selected.</p>
+        <div className="task-details-title">
+          <BookUser />
+          <h1>Task details</h1>
+          <p>Click on task to show it's details...</p>
+        </div>
       </div>
     );
   }
@@ -26,7 +30,7 @@ export const TaskDetails: React.FC<TaskDetailsProps> = ({ selectedTask }) => {
 
   const categoryClass = selectedTask.category.toLowerCase();
   const priorityClass = selectedTask.priority.toLowerCase();
-  const statusClass = selectedTask.completed ? "" : "incomplete";
+  const statusClass = selectedTask.completed ? "complete" : "incomplete";
 
   return (
     <div className="task-details-wrapper">

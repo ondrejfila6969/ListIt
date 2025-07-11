@@ -1,0 +1,52 @@
+.category-canvas {
+  padding: 3rem 2rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", sans-serif;
+  max-width: 900px;
+  margin: 2rem auto;
+
+  .category-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2.5rem;
+    color: #1a1a1a;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .category-card {
+    padding: 1rem;
+    border-radius: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  .work { background-color: #f1c40f; }
+  .personal { background-color: #3498db; }
+  .shopping { background-color: #9b59b6; }
+  .health { background-color: #1abc9c; }
+  .finance { background-color: #e67e22; }
+  .school { background-color: #e74c3c; }
+  .home { background-color: #95a5a6; }
+  .travel { background-color: #34495e; }
+  .other { background-color: #7f8c8d; }
+}

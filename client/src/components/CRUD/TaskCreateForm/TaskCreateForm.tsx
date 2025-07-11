@@ -5,8 +5,6 @@ import { createTask } from "../../../models/task/task";
 import type { TaskFormData } from "../../../models/task/interfaces/task";
 import { useAuth } from "../../../context/AuthProvider/AuthProvider";
 
-export type TaskFormDataForCreate = TaskFormData & { user: string };
-
 export const TaskCreateForm: React.FC<{
   onClose: () => void;
   onCreated: () => void;
@@ -14,9 +12,9 @@ export const TaskCreateForm: React.FC<{
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState<TaskFormData>({
+  const [formData, setFormData] = useState<TaskFormData>({ // DEFAULT DATA
     name: "",
-    category: "work", // výchozí správná hodnota
+    category: "work",
     description: "",
     deadlineDate: "",
     priority: "medium",

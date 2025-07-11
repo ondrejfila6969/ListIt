@@ -11,6 +11,7 @@ import {
   LayoutDashboard,
   ClipboardCheck,
   Logs,
+  House
 } from "lucide-react";
 import { useAuth } from "../../context/AuthProvider/AuthProvider";
 
@@ -43,12 +44,8 @@ export const SideBar: React.FC = () => {
           </div>
         </div>
         <div className="sidebar-categories">
-          <SideBarCategory
-            name="Dashboard"
-            icon={LayoutDashboard}
-            color="white"
-            path="/"
-          />
+          <SideBarCategory name="Home" icon={House} color="white" path="/" />
+          <SideBarCategory name="About" icon={Info} color="white" path="/about" />
           <SideBarCategory
             name="My Task"
             icon={ClipboardCheck}
@@ -67,7 +64,6 @@ export const SideBar: React.FC = () => {
             color="white"
             path="/settings"
           />
-          <SideBarCategory name="Help" icon={Info} color="white" path="/help" />
         </div>
 
         <div className="sidebar-logout">

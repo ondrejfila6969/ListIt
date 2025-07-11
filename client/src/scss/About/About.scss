@@ -1,0 +1,81 @@
+.about-wrapper {
+  background-color: #ffffff;
+  border-left: 6px solid #0048ff;
+  padding: 2rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+  color: #1a1a1a;
+  font-family: "Segoe UI", sans-serif;
+  width: 100%;
+
+  .about-title-color {
+    color: #0048ff;
+  }
+
+  .about-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+
+  .about-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 1.5rem;
+
+    em {
+      font-style: italic;
+    }
+
+    strong {
+      font-weight: bolder;
+    }
+  }
+
+  .about-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+      color: #222;
+      margin-bottom: 0.7rem;
+
+      span {
+        color: #0048ff;
+        font-weight: bold;
+        margin-right: 0.6rem;
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .about-footer {
+    font-size: 0.9rem;
+    color: #555;
+    font-style: italic;
+  }
+
+  .about-author {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: right;
+    margin-top: 2rem;
+    color: #1a1a1a;
+
+    a.about-portfolio {
+      color: #0048ff;
+      text-decoration: none;
+      font-weight: 700;
+
+      &:hover {
+        color: #002b99;
+      }
+    }
+  }
+}

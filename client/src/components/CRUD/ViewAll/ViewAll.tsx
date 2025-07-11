@@ -1,11 +1,17 @@
 import React from "react";
-import { Loading } from "../../../pages/Loading/Loading";
-import { Error } from "../../../pages/Error/Error";
 import "../../../scss/CRUD/ViewAll/ViewAll.scss";
 import { Trash2, Check } from "lucide-react";
+
+// PAGES/COMPONENTS
+import { Loading } from "../../../pages/Loading/Loading";
+import { Error } from "../../../pages/Error/Error";
+
+// MODELS
 import { completeTask } from "../../../models/task/task";
-import type { ViewAllProps } from "./ViewAllProps/ViewAllProps";
 import { deleteTask } from "../../../models/task/task";
+
+// TYPES
+import type { ViewAllProps } from "./ViewAllProps/ViewAllProps";
 import type { TaskStructure } from "../../../models/task/interfaces/task";
 
 export const ViewAll: React.FC<ViewAllProps> = ({
