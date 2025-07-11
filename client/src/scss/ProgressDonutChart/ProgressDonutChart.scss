@@ -1,0 +1,46 @@
+.progress-donut-chart-wrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  padding: 1rem 0;
+}
+
+.donut-chart {
+  width: 180px;
+  height: 180px;
+  position: relative;
+
+  .CircularProgressbar {
+    width: 100%;
+    height: 100%;
+  }
+
+  .donut-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  &.completed .donut-label {
+    color: #27ae60;
+  }
+
+  &.incomplete .donut-label {
+    color: #e74c3c;
+  }
+}
+
+.donut-loading {
+  text-align: center;
+  font-weight: bold;
+  padding: 2rem;
+}

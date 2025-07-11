@@ -2,13 +2,11 @@
   background-color: #f9f9f9;
   padding: 1rem;
   border-radius: 8px;
-  height: 50%;
-  overflow-y: auto;
   box-sizing: border-box;
+  max-width: 100%;
+  overflow-y: hidden;
 
   .tasks-status-title {
-    width: 100%;
-    height: 30px;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -23,6 +21,16 @@
     svg {
       width: 30px;
       height: 30px;
+      flex-shrink: 0;
+    }
+  }
+
+  .tasks-status-container.no-paragraph {
+    .tasks-status-chart.expanded {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 250px;
     }
   }
 }
