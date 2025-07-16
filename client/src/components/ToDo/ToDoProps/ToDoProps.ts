@@ -1,7 +1,8 @@
-import type { Task } from "../../../models/task/interfaces/task";
-export type ToDoProps = {
+import type { TaskStructure } from "../../../models/task/interfaces/task";
+
+export interface ToDoProps {
   name: string;
   showAddButton?: boolean;
   showSortButton?: boolean;
-  onTaskSelect: (task: Task) => void;
-};
+  onTaskSelect: (task: TaskStructure) => void;
+}

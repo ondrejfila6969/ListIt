@@ -1,5 +1,9 @@
-import type { TaskStructure } from "../../../models/task/interfaces/task";
+import type { Task } from "../../../models/task/interfaces/task";
 
-export interface TaskDetailsProps {
-    selectedTask: TaskStructure | null
+export type TaskDetailsProps = {
+  selectedTask: Task | null;
+  onClose?: () => void;
 }
+
+export type CategoryType = "work" | "personal" | "shopping" | "learning" | "health" | "finance" | "other";
+export type PriorityType = "low" | "medium" | "high";

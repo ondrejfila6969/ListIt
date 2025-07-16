@@ -14,49 +14,25 @@ import { deleteTask } from "../../../models/task/task";
 import type { ViewAllProps } from "./ViewAllProps/ViewAllProps";
 import type { TaskStructure } from "../../../models/task/interfaces/task";
 
-export const ViewAll: React.FC<ViewAllProps> = ({
-  tasks,
-  isLoaded,
-  onTaskDeleted,
-  onTaskCompleted,
-  onTaskSelect, 
-}) => {
-  if (isLoaded === null) return <Error />;
-  if (!isLoaded) return <Loading />;
+import { useTask } from "../../../context/TaskProvider/TaskProvider";
+
+export const ViewAll: React.FC<ViewAllProps> = ({ onTaskSelect }) => {
+  const { tasks, isLoading, reloadTasks } = useTask();
+
+  if (isLoading) return <Loading/>
+  if (!tasks) return <Error/>
 
   const handleDeleteButton = async (taskId: string) => {
-    try {
-      const res = await deleteTask(taskId);
-      if (res.status === 200) {
-        onTaskDeleted();
-      } else {
-        console.log("FAILED TO DELETE TASK!");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await deleteTask(taskId);
+    if (res.status === 200) reloadTasks();
+    else console.error("FAILED TO DELETE TASK!");
   };
 
   const handleCompleteButton = async (taskId: string, task: TaskStructure) => {
-    try {
-      const formData = {
-        name: task.name,
-        category: task.category,
-        description: task.description,
-        deadlineDate: task.deadlineDate || "",
-        priority: task.priority,
-        completed: true,
-      };
-
-      const res = await completeTask(taskId, formData);
-      if (res.status === 200) {
-        onTaskCompleted();
-      } else {
-        console.log("FAILED TO COMPLETE TASK!");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const updatedTask = { ...task, completed: true };
+    const res = await completeTask(taskId, updatedTask);
+    if (res.status === 200) reloadTasks();
+    else console.error("FAILED TO COMPLETE TASK!");
   };
 
   const categoryMap: Record<string, string> = {
@@ -73,13 +49,11 @@ export const ViewAll: React.FC<ViewAllProps> = ({
 
   return (
     <div className="viewall-task-list">
-      {tasks && tasks.length > 0 ? (
+      {tasks.length > 0 ? (
         tasks.map((task) => (
           <div
             key={task._id}
-            className={`viewall-task-card ${
-              task.completed ? "completed" : "incomplete"
-            }`}
+            className={`viewall-task-card ${task.completed ? "completed" : "incomplete"}`}
             onClick={() => onTaskSelect(task)}
           >
             <div className="viewall-task-header">
@@ -93,18 +67,13 @@ export const ViewAll: React.FC<ViewAllProps> = ({
                 </span>
               </div>
             </div>
-
-            <p className="viewall-task-desc">
-              {task.description || "No description provided."}
-            </p>
-
+            <p className="viewall-task-desc">{task.description || "No description."}</p>
             <div className="viewall-footer">
               <p className="viewall-task-date">Due: {task.deadlineDate}</p>
-              <div className="viewall-task-actions" onClick={e => e.stopPropagation()}>
+              <div className="viewall-task-actions" onClick={(e) => e.stopPropagation()}>
                 {!task.completed && (
                   <button
                     className="viewall-complete-btn"
-                    aria-label={`Mark ${task.name} as completed`}
                     onClick={() => handleCompleteButton(task._id, task)}
                   >
                     <Check />
@@ -112,7 +81,6 @@ export const ViewAll: React.FC<ViewAllProps> = ({
                 )}
                 <button
                   className="viewall-delete-btn"
-                  aria-label={`Delete ${task.name}`}
                   onClick={() => handleDeleteButton(task._id)}
                 >
                   <Trash2 />

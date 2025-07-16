@@ -1,13 +1,7 @@
+import type { CategoryType } from "../../../components/TaskDetails/TaskDetailsProps/TaskDetailsProps";
 export type TaskFormData = {
   name: string;
-  category:
-    | "work"
-    | "personal"
-    | "shopping"
-    | "learning"
-    | "health"
-    | "finance"
-    | "other";
+  category: CategoryType
   description?: string;
   deadlineDate: string;
   priority: "low" | "medium" | "high";

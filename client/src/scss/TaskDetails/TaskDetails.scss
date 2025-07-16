@@ -1,96 +1,177 @@
 .task-details-wrapper {
   width: 650px;
-  display: block;
-  justify-content: right;
-  align-items: right;
+  max-height: 90vh;
+  overflow-y: auto;
   background-color: #f9f9f9;
-  padding: 1.5rem;
-  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
   box-sizing: border-box;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
   .task-details-title {
-    width: 100%;
-    height: 30px;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
 
     h1 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       color: #2c3e50;
+      font-weight: 700;
+      margin: 0;
     }
 
     svg {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       color: #2c3e50;
+      flex-shrink: 0;
     }
   }
 
   .task-details-container {
     background-color: #ffffff;
-    border-radius: 8px;
-    padding: 1rem 1.5rem;
-    font-size: 1rem;
-    line-height: 1.6;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+    font-size: 0.85rem;
+    line-height: 1.3;
     color: #2c3e50;
+    box-shadow: inset 0 0 12px #f0f0f0;
 
-    h2 {
+    label {
+      display: flex;
+      flex-direction: column;
       margin-bottom: 0.8rem;
-      font-size: 1.4rem;
+      font-weight: 600;
+      color: #34495e;
+      user-select: none;
+
+      &:last-of-type {
+        margin-bottom: 1rem;
+      }
+
+      input[type="text"],
+      input[type="date"],
+      textarea,
+      select {
+        margin-top: 0.25rem;
+        padding: 0.3rem 0.5rem;
+        border: 1.5px solid #bdc3c7;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        transition: border-color 0.25s ease;
+
+        &:focus {
+          outline: none;
+          border-color: #3498db;
+          box-shadow: 0 0 6px rgba(52, 152, 219, 0.4);
+        }
+
+        &:disabled {
+          background-color: #f5f7fa;
+          cursor: not-allowed;
+          color: #95a5a6;
+        }
+      }
+
+      textarea {
+        min-height: 50px;
+        resize: vertical;
+        font-family: inherit;
+      }
     }
 
-    p {
-      margin-bottom: 0.6rem;
+    label[style] {
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 0.25rem !important;
+
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
     }
 
-    strong {
-      font-weight: bold;
-    }
+    button[type="submit"] {
+      background-color: #3498db;
+      color: white;
+      font-weight: 700;
+      padding: 0.4rem 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
 
-    .incomplete {
-      color: #e74c3c;
-      font-weight: bold;
-    }
+      transition: background-color 0.3s ease;
 
-    .complete {
-      color: #2ecc71;
-      font-weight: bold;
+      &:hover:not(:disabled) {
+        background-color: #2980b9;
+      }
+
+      &:disabled {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+      }
     }
   }
 
   .viewall-task-category {
     display: inline-block;
-    padding: 0.25rem 0.6rem;
+    padding: 0.2rem 0.4rem;
     border-radius: 12px;
-    font-weight: bold;
+    font-weight: 700;
     color: white;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     text-transform: capitalize;
 
-    &.work { background-color: #f1c40f; }
-    &.personal { background-color: #3498db; }
-    &.shopping { background-color: #9b59b6; }
-    &.health { background-color: #1abc9c; }
-    &.finance { background-color: #e67e22; }
-    &.school { background-color: #e74c3c; }
-    &.home { background-color: #95a5a6; }
-    &.travel { background-color: #34495e; }
-    &.other { background-color: #7f8c8d; }
+    &.work {
+      background-color: #f1c40f;
+    }
+    &.personal {
+      background-color: #3498db;
+    }
+    &.shopping {
+      background-color: #9b59b6;
+    }
+    &.health {
+      background-color: #1abc9c;
+    }
+    &.finance {
+      background-color: #e67e22;
+    }
+    &.school {
+      background-color: #e74c3c;
+    }
+    &.home {
+      background-color: #95a5a6;
+    }
+    &.travel {
+      background-color: #34495e;
+    }
+    &.other {
+      background-color: #7f8c8d;
+    }
   }
 
   .viewall-priority {
     display: inline-block;
-    padding: 0.25rem 0.6rem;
+    padding: 0.2rem 0.4rem;
     border-radius: 12px;
-    font-weight: bold;
+    font-weight: 700;
     color: white;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     text-transform: capitalize;
 
-    &.low { background-color: #2ecc71; }
-    &.medium { background-color: #f39c12; }
-    &.high { background-color: #e74c3c; }
+    &.low {
+      background-color: #2ecc71;
+    }
+    &.medium {
+      background-color: #f39c12;
+    }
+    &.high {
+      background-color: #e74c3c;
+    }
   }
 }

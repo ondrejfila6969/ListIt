@@ -1,9 +1,5 @@
-import type { Task } from "../../../../models/task/interfaces/task";
+import type { TaskStructure } from "../../../../models/task/interfaces/task";
 
-export type ViewAllProps = {
-  tasks?: Task[];
-  isLoaded: boolean | null;
-  onTaskDeleted: () => void;
-  onTaskCompleted: () => void;
-  onTaskSelect: (task: Task) => void;
-};
+export interface ViewAllProps {
+  onTaskSelect: (task: TaskStructure) => void;
+}

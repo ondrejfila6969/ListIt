@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { getAllTasks } from "../../models/task/task";
-import type { ResponseData, Task } from "../../models/task/interfaces/task";
+import React, { useState } from "react";
 
 import "../../scss/ToDo/ToDo.scss";
 import { NotebookPen } from "lucide-react";
@@ -8,36 +6,24 @@ import type { ToDoProps } from "./ToDoProps/ToDoProps";
 import { ViewAll } from "../CRUD/ViewAll/ViewAll";
 import { AddTaskButton } from "../AddTaskButton/AddTaskButton";
 import { SortTasksPriority } from "../SortTasksPriority/SortTasksPriority";
+import { useTask } from "../../context/TaskProvider/TaskProvider";
 
 export const ToDo: React.FC<ToDoProps> = ({
   name,
-  showAddButton,
-  showSortButton,
-  onTaskSelect
+  showAddButton = false,
+  showSortButton = false,
+  onTaskSelect,
 }) => {
-  const [tasks, setTasks] = useState<Task[]>();
-  const [isLoaded, setLoaded] = useState<boolean | null>(false);
-  const [showCreateForm, setShowCreateForm] = useState<boolean | null>(false);
+  const { tasks, reloadTasks } = useTask();
+  const [showCreateForm, setShowCreateForm] = useState(false);
 
   const openCreateForm = () => setShowCreateForm(true);
   const closeCreateForm = () => setShowCreateForm(false);
 
   const onTaskCreated = () => {
-    loadData();
+    reloadTasks();
+    closeCreateForm();
   };
-
-  const loadData = async () => {
-    const res: ResponseData<Task[]> = await getAllTasks();
-    if (res.status === 500 || res.status === 404) return setLoaded(null);
-    if (res.status === 200) {
-      setTasks(res.payload);
-      setLoaded(true);
-    }
-  };
-
-  useEffect(() => {
-    loadData();
-  }, []);
 
   return (
     <div className="todo-wrapper">
@@ -54,18 +40,12 @@ export const ToDo: React.FC<ToDoProps> = ({
             />
           )}
           {showSortButton && tasks && (
-            <SortTasksPriority tasks={tasks} setTasks={setTasks} />
+            <SortTasksPriority tasks={tasks} setTasks={() => {}} />
           )}
         </div>
       </div>
       <div className="todo-container">
-        <ViewAll
-          tasks={tasks}
-          isLoaded={isLoaded}
-          onTaskDeleted={loadData}
-          onTaskCompleted={loadData}
-          onTaskSelect={onTaskSelect}
-        />
+        <ViewAll onTaskSelect={onTaskSelect} />
       </div>
     </div>
   );
